@@ -1,14 +1,14 @@
 repeat task.wait() until game:IsLoaded() == true
 local injected = true
 local oldrainbow = false
-local customdir = (shared.VapePrivate and "vapeprivate/" or "vape/")
+local customdir = (shared.VapePrivate and "vapeprivate/" or "oceal/")
 local betterisfile = function(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
 end
 local function GetURL(scripturl)
 	if shared.VapeDeveloper then
-		if not betterisfile("vape/"..scripturl) then
+		if not betterisfile("orceal/"..scripturl) then
 			error("File not found : vape/"..scripturl)
 		end
 		return readfile("vape/"..scripturl)
@@ -49,12 +49,12 @@ local function checkassetversion()
 end
 
 if not (getasset and requestfunc and queueteleport) then
-	print("Vape not supported with your exploit.")
+	print("oceal not supported with your exploit.")
 	return
 end
 
 if shared.VapeExecuted then
-	error("Vape Already Injected")
+	error("oceal Already Injected")
 	return
 else
 	shared.VapeExecuted = true
@@ -63,11 +63,11 @@ end
 if isfolder(customdir:gsub("/", "")) == false then
 	makefolder(customdir:gsub("/", ""))
 end
-if isfolder("vape") == false then
-	makefolder("vape")
+if isfolder("oceal") == false then
+	makefolder("oceal")
 end
-if not betterisfile("vape/assetsversion.dat") then
-	writefile("vape/assetsversion.dat", "1")
+if not betterisfile("oceal") then
+	writefile("oceal", "1")
 end
 if isfolder(customdir.."CustomModules") == false then
 	makefolder(customdir.."CustomModules")
@@ -80,7 +80,7 @@ if not betterisfile("vape/language.dat") then
 	writefile("vape/language.dat", suc and res or "en-us")
 end
 if not pcall(function() return GetURL("translations/"..readfile("vape/language.dat")..".vapetranslation") end) then
-	writefile("vape/language.dat", "en-us")
+	writefile("vape/language.dat", "oceal")
 end
 local assetver = checkassetversion()
 if assetver and assetver > readfile("vape/assetsversion.dat") then
@@ -99,7 +99,7 @@ end
 
 local GuiLibrary = loadstring(GetURL("NewGuiLibrary.lua"))()
 local translations = {}--loadstring(GetURL("translations/"..GuiLibrary["Language"]..".vapetranslation"))()
-local translatedlogo = false--pcall(function() return GetURL("translations/"..GuiLibrary["Language"].."/VapeLogo1.png") end)
+local translatedlogo = false--pcall(function() return GetURL("translations/"..GuiLibrary["Language"].."/oceal.png") end)
 
 local checkpublicreponum = 0
 local checkpublicrepo
