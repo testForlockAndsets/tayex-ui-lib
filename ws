@@ -1,7 +1,7 @@
 repeat task.wait() until game:IsLoaded() == true
 local injected = true
-local oldrainbow = false
-local customdir = (shared.VapePrivate and "vapeprivate/" or "oceal/")
+local oldrainbow = true
+local customdir = (shared.VapePrivate and "oceal/")
 local betterisfile = function(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
@@ -9,9 +9,9 @@ end
 local function GetURL(scripturl)
 	if shared.VapeDeveloper then
 		if not betterisfile("orceal/"..scripturl) then
-			error("File not found : vape/"..scripturl)
+			error("File not found : oceal/"..scripturl)
 		end
-		return readfile("vape/"..scripturl)
+		return readfile("oceal/"..scripturl)
 	else
 		local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..scripturl, true)
 		assert(res ~= "404: Not Found", "File not found")
@@ -77,28 +77,28 @@ if isfolder(customdir.."Profiles") == false then
 end
 if not betterisfile("vape/language.dat") then
 	local suc, res = pcall(function() return gethiddenproperty(game:GetService("Players").LocalPlayer, "ReplicatedLocaleId") end)
-	writefile("vape/language.dat", suc and res or "en-us")
+	writefile("guage.dat", suc and res or "en-us")
 end
 if not pcall(function() return GetURL("translations/"..readfile("vape/language.dat")..".vapetranslation") end) then
 	writefile("vape/language.dat", "oceal")
 end
 local assetver = checkassetversion()
-if assetver and assetver > readfile("vape/assetsversion.dat") then
+if assetver and assetver > readfile("oceal/assetsversion.dat") then
 	if shared.VapeDeveloper == nil then
-		if isfolder("vape/assets") then
+		if isfolder("oceal/ssets") then
 			if delfolder then
-				delfolder("vape/assets")
+				delfolder("oceal/assets")
 			end
 		end
-		writefile("vape/assetsversion.dat", assetver)
+		writefile("oceal/assetsversion.dat", assetver)
 	end
 end
-if isfolder("vape/assets") == false then
-	makefolder("vape/assets")
+if isfolder("oceal/assets") == false then
+	makefolder("oceal/assets")
 end
 
 local GuiLibrary = loadstring(GetURL("NewGuiLibrary.lua"))()
-local translations = {}--loadstring(GetURL("translations/"..GuiLibrary["Language"]..".vapetranslation"))()
+local translations = {}--loadstring(GetURL("translations/"..GuiLibrary["Language"]..".ocealtranslation"))()
 local translatedlogo = false--pcall(function() return GetURL("translations/"..GuiLibrary["Language"].."/oceal.png") end)
 
 local checkpublicreponum = 0
@@ -348,7 +348,7 @@ ProfilesTextList = Profiles.CreateTextList({
 		bindbkg.Visible = GuiLibrary["Profiles"][profilename]["Keybind"] ~= ""
 		bindbkg.Parent = obj
 		local bindimg = Instance.new("ImageLabel")
-		bindimg.Image = getcustomassetfunc("vape/assets/KeybindIcon.png")
+		bindimg.Image = getcustomassetfunc("")
 		bindimg.BackgroundTransparency = 1
 		bindimg.Size = UDim2.new(0, 12, 0, 12)
 		bindimg.Position = UDim2.new(0, 4, 0, 5)
@@ -412,14 +412,14 @@ ProfilesTextList = Profiles.CreateTextList({
 			end
 		end)
 		bindbkg.MouseEnter:connect(function() 
-			bindimg.Image = getcustomassetfunc("vape/assets/PencilIcon.png") 
+			bindimg.Image = getcustomassetfunc("") 
 			bindimg.Visible = true
 			bindtext.Visible = false
 			bindbkg.Size = UDim2.new(0, 20, 0, 21)
 			bindbkg.Position = UDim2.new(1, -50, 0, 6)
 		end)
 		bindbkg.MouseLeave:connect(function() 
-			bindimg.Image = getcustomassetfunc("vape/assets/KeybindIcon.png")
+			bindimg.Image = getcustomassetfunc("")
 			if GuiLibrary["Profiles"][profilename]["Keybind"] ~= "" then
 				bindimg.Visible = false
 				bindtext.Visible = true
@@ -473,7 +473,7 @@ local OnlineProfilesButtonImage = Instance.new("ImageLabel")
 OnlineProfilesButtonImage.BackgroundTransparency = 1
 OnlineProfilesButtonImage.Position = UDim2.new(0, 14, 0, 7)
 OnlineProfilesButtonImage.Size = UDim2.new(0, 17, 0, 16)
-OnlineProfilesButtonImage.Image = getcustomassetfunc("vape/assets/OnlineProfilesButton.png")
+OnlineProfilesButtonImage.Image = getcustomassetfunc("")
 OnlineProfilesButtonImage.ImageColor3 = Color3.fromRGB(121, 121, 121)
 OnlineProfilesButtonImage.ZIndex = 1
 OnlineProfilesButtonImage.Active = false
@@ -494,7 +494,7 @@ OnlineProfilesExitButton.Name = "OnlineProfilesExitButton"
 OnlineProfilesExitButton.ImageColor3 = Color3.fromRGB(121, 121, 121)
 OnlineProfilesExitButton.Size = UDim2.new(0, 24, 0, 24)
 OnlineProfilesExitButton.AutoButtonColor = false
-OnlineProfilesExitButton.Image = getcustomassetfunc("vape/assets/ExitIcon1.png")
+OnlineProfilesExitButton.Image = getcustomassetfunc("")
 OnlineProfilesExitButton.Visible = true
 OnlineProfilesExitButton.Position = UDim2.new(1, -31, 0, 8)
 OnlineProfilesExitButton.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
@@ -511,7 +511,7 @@ end)
 local OnlineProfilesFrameShadow = Instance.new("ImageLabel")
 OnlineProfilesFrameShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 OnlineProfilesFrameShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
-OnlineProfilesFrameShadow.Image = getcustomassetfunc("vape/assets/WindowBlur.png")
+OnlineProfilesFrameShadow.Image = getcustomassetfunc(""
 OnlineProfilesFrameShadow.BackgroundTransparency = 1
 OnlineProfilesFrameShadow.ZIndex = -1
 OnlineProfilesFrameShadow.Size = UDim2.new(1, 6, 1, 6)
@@ -521,7 +521,7 @@ OnlineProfilesFrameShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 OnlineProfilesFrameShadow.Parent = OnlineProfilesFrame
 local OnlineProfilesFrameIcon = Instance.new("ImageLabel")
 OnlineProfilesFrameIcon.Size = UDim2.new(0, 19, 0, 16)
-OnlineProfilesFrameIcon.Image = getcustomassetfunc("vape/assets/ProfilesIcon.png")
+OnlineProfilesFrameIcon.Image = getcustomassetfunc("")
 OnlineProfilesFrameIcon.Name = "WindowIcon"
 OnlineProfilesFrameIcon.BackgroundTransparency = 1
 OnlineProfilesFrameIcon.Position = UDim2.new(0, 10, 0, 13)
